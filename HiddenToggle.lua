@@ -2,7 +2,7 @@ zonePosition={0,12.5,40}--spawn position of the hidden zone, relative to this ob
 zoneRotation={0,0,0}--rotation of the hidden zone
 zoneScale={80,52,80}--size of the hidden zone
 
-function onLoad()
+function onLoad(state)
  local selfScale=self.getScale()
  local params={
  function_owner=self,
@@ -16,6 +16,8 @@ function onLoad()
  click_function='ToggleHidden'
  }
  self.createButton(params)
+ log(state)
+ zone=getObjectFromGUID(state)
 end
 
 function ToggleHidden(obj,color,alt)
@@ -23,9 +25,13 @@ function ToggleHidden(obj,color,alt)
   zone.Destroy()
   zone=nil
   self.setColorTint({0.5,0.5,0.5})
+  self.script_state=""
  else
   zone=spawnObject({type="FogOfWarTrigger",position=self.PositionToWorld(zonePosition),rotation=zoneRotation,scale=zoneScale})
   zone.setValue(color)
   self.setColorTint(Color.fromString(color))
+  log(zone.guid)
+  self.script_state=zone.guid
+  log(self.script_state)
  end
 end
