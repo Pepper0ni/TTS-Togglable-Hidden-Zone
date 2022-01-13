@@ -16,7 +16,6 @@ function onLoad(state)
  click_function='ToggleHidden'
  }
  self.createButton(params)
- log(state)
  zone=getObjectFromGUID(state)
 end
 
@@ -30,8 +29,6 @@ function ToggleHidden(obj,color,alt)
   zone=spawnObject({type="FogOfWarTrigger",position=self.PositionToWorld(zonePosition),rotation=zoneRotation,scale=zoneScale})
   zone.setValue(color)
   self.setColorTint(Color.fromString(color))
-  log(zone.guid)
   self.script_state=zone.guid
-  log(self.script_state)
  end
 end
